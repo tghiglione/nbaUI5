@@ -5,11 +5,13 @@ sap.ui.define([
     "sap/m/MessageBox",
     "sap/m/MessageToast",
     "../utils/constants",
+    "sap/ui/model/Filter",
+    "sap/ui/model/FilterOperator"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller, UIComponent, Fragment, MessageBox, MessageToast,constants) {
+    function (Controller, UIComponent, Fragment, MessageBox, MessageToast,constants, Filter, FilterOperator) {
         "use strict";
 
         return Controller.extend("nba.controller.Jugadores", {
@@ -212,7 +214,21 @@ sap.ui.define([
                 }else{
                     MessageToast.show(bundle.getText("completarCampos"))
                 }               
-            }
-            
+            },
+            busquedaJugador:function(oEvent){
+                let filters=[];
+                let query=oEvent.getParameter("query");
+                query=query.charAt(0).toUpperCase() + query.slice(1).toLowerCase();
+                if(query && query.length>0){
+                    filters.push(new Filter({
+                        path:"APELLIDO",
+                        operator:FilterOperator.Contains,
+                        value1:query
+                    }))
+                }
+                let tabla=this.getView().byId("idJugadoresTable");
+                let binding=tabla.getBinding("items");
+                binding.filter(filters)
+            },
         });
     });

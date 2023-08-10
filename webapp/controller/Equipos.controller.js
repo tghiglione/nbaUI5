@@ -6,11 +6,13 @@ sap.ui.define([
     "sap/m/MessageToast",
     "../utils/formatter",
     "../utils/constants",
+    "sap/ui/model/Filter",
+    "sap/ui/model/FilterOperator"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller,UIComponent, Fragment, MessageBox, MessageToast, formatter, constants) {
+    function (Controller,UIComponent, Fragment, MessageBox, MessageToast, formatter, constants, Filter, FilterOperator) {
         "use strict";
 
         return Controller.extend("nba.controller.Equipos", {
@@ -195,6 +197,21 @@ sap.ui.define([
             },
             closePopOver: function () {
                 this.conferenciaPopOver.close();
+            },
+            buscarEquipo:function(oEvent){
+                var filters=[];
+                var query=oEvent.getParameter("query");
+                var queryFormateado=query.charAt(0).toUpperCase() + query.slice(1).toLowerCase();
+                if(query && query.length>0){
+                    filters.push(new Filter({
+                        path:"NOMBRE",
+                        operator:FilterOperator.Contains,
+                        value1:queryFormateado
+                    }))
+                };
+                var list=this.getView().byId("equiposTable");
+                var binding=list.getBinding("items");
+                binding.filter(filters);
             }
         });
     });

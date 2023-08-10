@@ -1,6 +1,7 @@
 <mvc:View
 	controllerName="nba.controller.Jugadores"
 	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
 	xmlns="sap.m"
 	xmlns:f="sap.f"
 	xmlns:layout="sap.ui.layout"
@@ -43,10 +44,19 @@
 					items="{To_Jugadores}"
 					class="sapFDynamicPageAlignContent"
 					width="auto">
-				<headerToolbar>
-					<Toolbar id="_IDGenToolbar1">
-						<Title id="_IDGenTitle2" text="{i18n>jugadores}" level="H2"/>
-						<ToolbarSpacer id="_IDGenToolbarSpacer1"/>
+					<headerToolbar>
+					<Toolbar id="_IDGenToolbar2">
+						<Select id="labelPosicion" selectedKey="{}" forceSelection="false" items="{}" width="200px">
+							<items>
+								<core:Item id="_IDGenItem1" key="{}" text="{}"/>
+							</items>
+						</Select>
+						<Button id="btnFilters" text="Filtrar" icon="sap-icon://filter" press="onFilter"></Button>
+						<Button id="btnClearFilters" text="Borrar Filtros" icon="sap-icon://clear-filter" press="onClearFilter"></Button>
+						<ToolbarSeparator id="_IDGenToolbarSeparator1" />
+						<SearchField id="_IDGenSearchField1" width="100%" search="busquedaJugador" />
+						<ToolbarSeparator id="_IDGenToolbarSeparator2" />
+						<ToolbarSpacer id="_IDGenToolbarSpacer3" />
 						<Button id="_IDGenButton"
 							tooltip="Add"
 							icon="sap-icon://add"
@@ -54,6 +64,7 @@
 							press="onOpenDialog"/>
 					</Toolbar>
 				</headerToolbar>
+				
 				<columns>
 					<Column id="_IDGenColumn1"
 							width="12em">

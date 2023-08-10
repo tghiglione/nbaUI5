@@ -57,7 +57,9 @@
         "sap.ui.table": {},
         "sap.ushell": {},
         "sap.ui.webc.main": {},
-        "sap.suite.ui.microchart": {}
+        "sap.suite.ui.microchart": {},
+        "sap.ui.fl": {},
+				"sap.ui.mdc": {}
       }
     },
     "contentDensities": {
