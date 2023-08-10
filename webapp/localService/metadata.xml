@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZGW_NBA_SRV" xml:lang="es" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="Equipos" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="EQUIPOID"/>
+                </Key>
+                <Property Name="EQUIPOID" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Id" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NOMBRE" Type="Edm.String" Nullable="false" MaxLength="35" sap:unicode="false" sap:label="Nombre" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="CIUDAD" Type="Edm.String" Nullable="false" MaxLength="35" sap:unicode="false" sap:label="Ciudad" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ESTADIO" Type="Edm.String" Nullable="false" MaxLength="35" sap:unicode="false" sap:label="Estadio" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CONFERENCIA" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Conferencia" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="IMAGEN" Type="Edm.String" Nullable="false" MaxLength="132" sap:unicode="false" sap:label="Imagen" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="To_Jugadores" Relationship="ZGW_NBA_SRV.EquiposToJugadores" FromRole="FromRole_EquiposToJugadores" ToRole="ToRole_EquiposToJugadores"/>
+            </EntityType>
+            <EntityType Name="Jugadores" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="JUGADORID"/>
+                </Key>
+                <Property Name="JUGADORID" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="JugadorId" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="EQUIPOID" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="EquipoId" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NOMBRE" Type="Edm.String" Nullable="false" MaxLength="35" sap:unicode="false" sap:label="Nombre" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="APELLIDO" Type="Edm.String" Nullable="false" MaxLength="35" sap:unicode="false" sap:label="Apellido" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="POSICION" Type="Edm.String" Nullable="false" MaxLength="35" sap:unicode="false" sap:label="Posicion" sap:creatable="false" sap:updatable="false"/>
+                <NavigationProperty Name="To_Detalle" Relationship="ZGW_NBA_SRV.JugadoresToDetalle" FromRole="FromRole_JugadoresToDetalle" ToRole="ToRole_JugadoresToDetalle"/>
+            </EntityType>
+            <EntityType Name="Detalle" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="JUGADORID"/>
+                </Key>
+                <Property Name="JUGADORID" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="JugadorId" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NOMBRE" Type="Edm.String" Nullable="false" MaxLength="35" sap:unicode="false" sap:label="Nombre" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="APELLIDO" Type="Edm.String" Nullable="false" MaxLength="35" sap:unicode="false" sap:label="Apellido" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ALTURA" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:label="Altura" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="NACIMIENTO" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="Nacimiento" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="EDAD" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:label="Edad" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="NACIONALIDAD" Type="Edm.String" Nullable="false" MaxLength="35" sap:unicode="false" sap:label="Nacionalidad" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <Association Name="JugadoresToDetalle" sap:content-version="1">
+                <End Type="ZGW_NBA_SRV.Jugadores" Multiplicity="1" Role="FromRole_JugadoresToDetalle"/>
+                <End Type="ZGW_NBA_SRV.Detalle" Multiplicity="*" Role="ToRole_JugadoresToDetalle"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_JugadoresToDetalle">
+                        <PropertyRef Name="JUGADORID"/>
+                    </Principal>
+                    <Dependent Role="ToRole_JugadoresToDetalle">
+                        <PropertyRef Name="JUGADORID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="EquiposToJugadores" sap:content-version="1">
+                <End Type="ZGW_NBA_SRV.Equipos" Multiplicity="1" Role="FromRole_EquiposToJugadores"/>
+                <End Type="ZGW_NBA_SRV.Jugadores" Multiplicity="*" Role="ToRole_EquiposToJugadores"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_EquiposToJugadores">
+                        <PropertyRef Name="EQUIPOID"/>
+                    </Principal>
+                    <Dependent Role="ToRole_EquiposToJugadores">
+                        <PropertyRef Name="EQUIPOID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityContainer Name="ZGW_NBA_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="EquiposSet" EntityType="ZGW_NBA_SRV.Equipos" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="JugadoresSet" EntityType="ZGW_NBA_SRV.Jugadores" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="DetalleSet" EntityType="ZGW_NBA_SRV.Detalle" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <AssociationSet Name="JugadoresToDetalleSet" Association="ZGW_NBA_SRV.JugadoresToDetalle" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="JugadoresSet" Role="FromRole_JugadoresToDetalle"/>
+                    <End EntitySet="DetalleSet" Role="ToRole_JugadoresToDetalle"/>
+                </AssociationSet>
+                <AssociationSet Name="EquiposToJugadoresSet" Association="ZGW_NBA_SRV.EquiposToJugadores" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="EquiposSet" Role="FromRole_EquiposToJugadores"/>
+                    <End EntitySet="JugadoresSet" Role="ToRole_EquiposToJugadores"/>
+                </AssociationSet>
+            </EntityContainer>
+            <atom:link rel="self" href="http://stks4hpil.eastus2.cloudapp.azure.com:8002/sap/opu/odata/sap/ZGW_NBA_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="http://stks4hpil.eastus2.cloudapp.azure.com:8002/sap/opu/odata/sap/ZGW_NBA_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

@@ -1,0 +1,81 @@
+<mvc:View displayBlock="true" controllerName="nba.controller.Detalle" height="100%"
+		xmlns="sap.uxap"
+		xmlns:mvc="sap.ui.core.mvc"
+		xmlns:m="sap.m"
+		xmlns:f="sap.f"
+		xmlns:form="sap.ui.layout.form">
+	<ObjectPageLayout id="ObjectPageLayout"
+					showTitleInHeaderContent="true"
+					alwaysShowContentHeader="false"
+					preserveHeaderStateOnScroll="false"
+					headerContentPinnable="true"
+					isChildPage="true"
+					upperCaseAnchorBar="false"
+                    >
+				<headerTitle>
+					<ObjectPageDynamicHeaderTitle id="_IDGenObjectPageDynamicHeaderTitle1">
+						<expandedHeading>
+							<m:Title id="_IDGenTitle1" text="{NOMBRE} {APELLIDO}" wrapping="true" class="sapUiSmallMarginEnd"/>
+						</expandedHeading>
+						<snappedHeading>
+							<m:FlexBox id="_IDGenFlexBox1" wrap="Wrap" fitContainer="true" alignItems="Center">
+								<m:FlexBox id="_IDGenFlexBox2" wrap="NoWrap" fitContainer="true" alignItems="Center" class="sapUiTinyMarginEnd">
+									<m:Title id="_IDGenTitle2" text="{NOMBRE} {APELLIDO}" wrapping="true" class="sapUiTinyMarginEnd"/>
+								</m:FlexBox>
+							</m:FlexBox>
+						</snappedHeading>
+						<actions>
+							<m:Button id="_IDGenButton1"
+									text="{i18n>editar}"
+									type="Emphasized"
+									press="onOpenEditPlayer"/>
+						</actions>
+
+					</ObjectPageDynamicHeaderTitle>
+				</headerTitle>
+
+				<headerContent>
+					<m:FlexBox id="_IDGenFlexBox3" wrap="Wrap" fitContainer="true" alignItems="Stretch">
+						<m:Image id="_IDGenImage2" src="{IMAGEN}" width="10em"/>
+						<m:VBox id="_IDGenVBox2" justifyContent="Center" class="sapUiSmallMarginEnd">
+							<m:Label id="_IDGenLabel2" text="{i18n>posicion}"/>
+							<m:Text id="_IDGenText2" text="{POSICION}"/>
+						</m:VBox>
+                        <m:VBox id="_IDGenVBox3" justifyContent="Center" class="sapUiSmallMarginEnd">
+							<m:Label id="_IDGenLabel3" text="{i18n>nacionalidad}"/>
+							<m:Text id="_IDGenText3" text="{NACIONALIDAD}"/>
+						</m:VBox>
+					</m:FlexBox>
+				</headerContent>
+		<sections>
+			<ObjectPageSection id="_IDGenObjectPageSection1" title="{i18n>informacion}">
+				<subSections>
+					<ObjectPageSubSection id="_IDGenObjectPageSubSection1">
+						<blocks>
+							<form:SimpleForm id="_IDGenSimpleForm1"
+								maxContainerCols="2"
+								editable="false"
+								layout="ResponsiveGridLayout"
+								labelSpanL="12"
+								labelSpanM="12"
+								emptySpanL="0"
+								emptySpanM="0"
+								columnsL="1"
+								columnsM="1">
+								<form:content>
+									<m:Label id="_IDGenLabel4" text="{i18n>altura}"/>
+									<m:Text id="_IDGenText" text="{ALTURA} cm"/>
+									<m:Label id="_IDGenLabel5" text="{i18n>edad}"/>
+									<m:Text id="_IDGenText4" text="{EDAD} años"/>
+									<m:Label id="_IDGenLabel6" text="{i18n>nacimiento}"/>
+									<m:Text id="_IDGenText5" text="{path: 'NACIMIENTO', 
+                                    formatter: '.formatter.fechaState'}"/>
+								</form:content>
+							</form:SimpleForm>
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+		</sections>
+	</ObjectPageLayout>
+</mvc:View>

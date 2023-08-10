@@ -1,0 +1,30 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+    xmlns:microchart="sap.suite.ui.microchart"
+	xmlns:core="sap.ui.core">
+	<Popover
+		id="conferenciaPopOver"
+		title="{i18n>equiposPorConferencia}"
+		class="sapUiResponsivePadding--header sapUiResponsivePadding--footer"
+		placement="Bottom">
+        <FlexBox id="_IDGenFlexBox1"  width="20rem" height="10rem" alignItems="Start" justifyContent="SpaceBetween">
+            <items>
+                <microchart:InteractiveDonutChart id="_IDGenInteractiveDonutChart1">
+                    <microchart:segments>
+                        <microchart:InteractiveDonutChartSegment id="segmentoEste"  label="{i18n>este}" color="Error"/>
+                        <microchart:InteractiveDonutChartSegment id="segmentoOeste" label="{i18n>oeste}" color="Critical"/>
+                    </microchart:segments>
+                </microchart:InteractiveDonutChart>
+            </items>
+        </FlexBox>
+		<footer>
+			<OverflowToolbar id="_IDGenOverflowToolbar1">
+				<ToolbarSpacer id="_IDGenToolbarSpacer1"/>
+				<Button
+					id="close"
+					text="{i18n>cerrar}"
+					press="closePopOver" />
+			</OverflowToolbar>
+		</footer>
+	</Popover>
+</core:FragmentDefinition>

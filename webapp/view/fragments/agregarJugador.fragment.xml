@@ -1,0 +1,45 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout">
+    <Dialog id="openDialog" title="{i18n>agregarJugador}">
+        <VBox id="_IDGenVBox1" class="sapUiMediumMargin">
+            <Label id="labelNombre" text="{i18n>nombre}" labelFor="nombre" />
+            <Input id="inputNombre" />
+            <Label id="labelApellido" text="{i18n>apellido}" labelFor="apellido" />
+            <Input id="inputApellido" />
+            <Select id="selectPosicion"
+                    forceSelection="true"
+                    selectedKey="{i18n>base}">
+                <core:Item id="_IDGenItem1" key="1" text="{i18n>base}" />
+                <core:Item id="_IDGenItem2" key="2" text="{i18n>alero}" />
+                <core:Item id="_IDGenItem3" key="3" text="{i18n>escolta}" />
+                <core:Item id="_IDGenItem4" key="4" text="{i18n>pivot}" />
+                <core:Item id="_IDGenItem5" key="4" text="{i18n>alaPivot}" />
+            </Select>
+            <Label id="labelAltura" text="{i18n>altura}" labelFor="altura" />
+            <Input id="inputAltura" />
+            <Label id="labelNacimiento" text="{i18n>nacimiento}" labelFor="datePicker"/>
+				<DatePicker
+					id="datePicker"
+					value="{
+						'path':'/valueDP2',
+						'type':'sap.ui.model.type.Date',
+						'formatOptions': {
+							'pattern': 'yyyyMMdd'
+						}
+					}"
+					change="handleChange"
+					class="sapUiSmallMarginBottom"/>
+            <Label id="labelEdad" text="{i18n>edad}" labelFor="edad" />
+            <Input id="inputEdad" />
+            <Label id="labelNacionalidad" text="{i18n>nacionalidad}" labelFor="nacionalidad" />
+            <Input id="inputNacionalidad" />	
+            <Label id="labelImagen" text="{i18n>urlImagen}" labelFor="imagen" />
+            <Input id="inputImagen" />
+        </VBox>
+        <beginButton>
+            <Button class="sapUiResponsiveMargin" id="btn-agregar" press="createPlayer" text="{i18n>agregar}"  type="Emphasized"/>
+        </beginButton>
+        <endButton>
+            <Button id="btn-close" press="onCloseDialog" text="{i18n>cancelar}"/>
+        </endButton>  
+    </Dialog>
+</core:FragmentDefinition>

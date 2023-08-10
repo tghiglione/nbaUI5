@@ -1,0 +1,63 @@
+<mvc:View
+	controllerName="nba.controller.Equipos"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:microchart="sap.suite.ui.microchart"
+	xmlns:main="sap.ui.webc.main"
+	xmlns:l="sap.ui.layout"
+	xmlns="sap.m" displayBlock="true">
+	<Table id="equiposTable"
+		items="{/EquiposSet}"
+		headerText="{i18n>tabletitle}"
+		mode="SingleSelectLeft">
+		<headerToolbar>
+					<Toolbar id="_IDGenToolbar1">
+						<Title id="_IDGenTitle2" text="{i18n>titleEquipos}" level="H2"/>
+						<ToolbarSpacer id="_IDGenToolbarSpacer1"/>
+						<Button id="_IDGenButton"
+							tooltip="Add"
+							icon="sap-icon://add"
+							text="{i18n>agregarEquipo}"
+							press="onOpenCrearEquipo"/>
+						<Button id="_IDGenButton2"
+							tooltip="Delete"
+							icon="sap-icon://delete"
+							text="{i18n>eliminarEquipo}"
+							press="deleteTeam"
+							type="Reject"/>
+					</Toolbar>
+				</headerToolbar>
+		<columns>
+			<Column id="equipoCol" width="14em" hAlign="Begin"><Text id="_IDGenText1" text="{i18n>equipo}" /></Column>
+			<Column id="estadioCol" minScreenWidth="Tablet" demandPopin="true" hAlign="Center"><Text id="_IDGenText2" text="{i18n>estadio}" /></Column>
+			<Column id="conferenciaCol" minScreenWidth="Tablet" demandPopin="true" hAlign="Center"><Text id="_IDGenText3" text="{i18n>conferencia}" /></Column>
+		</columns>
+		<items>
+			<ColumnListItem id="_IDGenColumnListItem1"
+				vAlign="Middle"
+                type="Navigation"
+				press="onTeamPress">
+				<cells>
+					<ObjectIdentifier id="_IDGenObjectIdentifier1" title="{NOMBRE}" text="{CIUDAD}" />
+					<Text id="_IDGenText5" text="{ESTADIO}" />
+
+                    <ObjectStatus 	id="statustext"
+                                	text="{CONFERENCIA}"
+									state="{path: 'CONFERENCIA', 
+                                    formatter: '.formatter.conferenciaState'}" />
+				</cells>
+			</ColumnListItem>
+			
+		</items>
+	</Table>
+	<l:VerticalLayout id="_IDGenVerticalLayout1"
+		class="sapUiContentPadding"
+		width="100%">
+		<l:content>
+			<Button id="_IDGenButton4"
+				text="{i18n>equiposPorConferencia}"
+				press="openConferenciaPopOver"
+				ariaHasPopup="Dialog"
+				type="Neutral" />
+		</l:content>
+	</l:VerticalLayout>
+</mvc:View>

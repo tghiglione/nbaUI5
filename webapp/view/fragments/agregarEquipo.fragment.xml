@@ -1,0 +1,26 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout">
+    <Dialog id="openAgregarEquipo" title="{i18n>agregarEquipo}">
+        <VBox id="_IDGenVBox1" class="sapUiMediumMargin">
+            <Label id="labelNombre" text="{i18n>nombre}" labelFor="nombre" />
+            <Input id="inputNombre" />
+            <Label id="labelCiudad" text="{i18n>ciudad}" labelFor="ciudad" />
+            <Input id="inputCiudad" />
+            <Label id="labelEstadio" text="{i18n>estadio}" labelFor="estadio" />
+            <Input id="inputEstadio" />
+            <Select id="selectConferencia"
+                    forceSelection="true"
+                    selectedKey="{i18n>este}">
+                <core:Item id="_IDGenItem1" key="1" text="{i18n>este}" />
+                <core:Item id="_IDGenItem2" key="2" text="{i18n>oeste}" />
+            </Select>	
+            <Label id="labelImagen" text="{i18n>urlImagen}" labelFor="imagen" />
+            <Input id="inputImagen" />
+        </VBox>
+        <beginButton>
+            <Button class="sapUiResponsiveMargin" id="btn-agregar" press="createTeam" text="{i18n>agregar}"  type="Emphasized"/>
+        </beginButton>
+        <endButton>
+            <Button id="btn-close" press="onCloseCrearEquipo" text="{i18n>cancelar}"/>
+        </endButton>  
+    </Dialog>
+</core:FragmentDefinition>
