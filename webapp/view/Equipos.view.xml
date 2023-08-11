@@ -14,8 +14,9 @@
 			<headerToolbar>
 						<Toolbar id="_IDGenToolbar1">
 							<Title id="_IDGenTitle2" text="{i18n>titleEquipos}" level="H2"/>
-							<SearchField id="_IDGenSearchField1" width="100%" search="buscarEquipo" />
 							<ToolbarSpacer id="_IDGenToolbarSpacer1"/>
+							<SearchField id="_IDGenSearchField1" width="auto" search="buscarEquipo" />
+							<ToolbarSpacer id="_IDGenToolbarSpacer2"/>
 							<Button id="_IDGenButton"
 								tooltip="Add"
 								icon="sap-icon://add"
