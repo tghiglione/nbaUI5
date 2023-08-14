@@ -7,11 +7,8 @@
             <Input id="inputCiudad" />
             <Label id="labelEstadio" text="{i18n>estadio}" labelFor="estadio" />
             <Input id="inputEstadio" />
-            <Select id="selectConferencia"
-                    forceSelection="true"
-                    selectedKey="{i18n>este}">
-                <core:Item id="_IDGenItem1" key="1" text="{i18n>este}" />
-                <core:Item id="_IDGenItem2" key="2" text="{i18n>oeste}" />
+            <Select id="selectConferencia" forceSelection="true" items="{filtros>/Conferencia}">
+                <core:Item id="_IDGenItem1" key="{filtros>key}" text="{filtros>text}"/>
             </Select>	
             <Label id="labelImagen" text="{i18n>urlImagen}" labelFor="imagen" />
             <Input id="inputImagen" />

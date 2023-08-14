@@ -77,6 +77,12 @@
         "dataSource": "mainService",
         "preload": true,
         "settings": {}
+      },
+      "filtros": {
+        "type": "sap.ui.model.json.JSONModel",
+        "settings": {},
+        "uri": "filtros.json",
+        "preload": false
       }
     },
     "resources": {

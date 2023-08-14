@@ -4,6 +4,7 @@
 	xmlns:microchart="sap.suite.ui.microchart"
 	xmlns:main="sap.ui.webc.main"
 	xmlns:l="sap.ui.layout"
+	xmlns:core="sap.ui.core"
 	xmlns="sap.m" displayBlock="true">
 	<Page id="equipos" showHeader="false" >
 		<Table id="equiposTable"
@@ -15,8 +16,18 @@
 						<Toolbar id="_IDGenToolbar1">
 							<Title id="_IDGenTitle2" text="{i18n>titleEquipos}" level="H2"/>
 							<ToolbarSpacer id="_IDGenToolbarSpacer1"/>
-							<SearchField id="_IDGenSearchField1" width="auto" search="buscarEquipo" />
-							<ToolbarSpacer id="_IDGenToolbarSpacer2"/>
+							<Label id="labelSearch" labelFor="buscadorEquipo" text="{i18n>buscarEquipo}" class="sapUiSmallMargin"/>
+							<Input id="buscadorEquipo" value="{filtros>/NombreKey}" placeholder="Nombre del equipo" class="sapUiSmallMargin" width="200px"/>
+ 							<ToolbarSpacer id="_IDGenToolbarSpacer2"/>
+							<Label id="labelConferencia" text="{i18n>conferencia}" class="sapUiSmallMargin"/>
+							<Select id="slConferencia" selectedKey="{filtros>/ConferenciaKey}" forceSelection="false" items="{filtros>/Conferencia}">
+								<items>
+									<core:Item id="conferenciaItem" key="{filtros>key}" text="{filtros>text}"/>
+								</items>
+							</Select>
+							<Button id="btnFilter" icon="sap-icon://filter" press="onFilterConferencia"/>
+							<Button id="btnClearFilter" icon="sap-icon://clear-filter" press="onClearFilter"/>
+							<ToolbarSpacer id="_IDGenToolbarSpacer3"/> 
 							<Button id="_IDGenButton"
 								tooltip="Add"
 								icon="sap-icon://add"

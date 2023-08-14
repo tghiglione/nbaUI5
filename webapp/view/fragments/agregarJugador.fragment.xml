@@ -5,14 +5,8 @@
             <Input id="inputNombre" />
             <Label id="labelApellido" text="{i18n>apellido}" labelFor="apellido" />
             <Input id="inputApellido" />
-            <Select id="selectPosicion"
-                    forceSelection="true"
-                    selectedKey="{i18n>base}">
-                <core:Item id="_IDGenItem1" key="1" text="{i18n>base}" />
-                <core:Item id="_IDGenItem2" key="2" text="{i18n>alero}" />
-                <core:Item id="_IDGenItem3" key="3" text="{i18n>escolta}" />
-                <core:Item id="_IDGenItem4" key="4" text="{i18n>pivot}" />
-                <core:Item id="_IDGenItem5" key="4" text="{i18n>alaPivot}" />
+            <Select id="selectPosicion" forceSelection="true" items="{filtros>/Posicion}">
+                <core:Item id="_IDGenItem1" key="{filtros>key}" text="{filtros>text}" />
             </Select>
             <Label id="labelAltura" text="{i18n>altura}" labelFor="altura" />
             <Input id="inputAltura" />

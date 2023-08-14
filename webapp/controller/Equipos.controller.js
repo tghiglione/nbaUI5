@@ -1,5 +1,7 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
+    "sap/ui/core/format/DateFormat",
+    "sap/ui/core/date/UI5Date",
     "sap/ui/core/UIComponent",
     "sap/ui/core/Fragment",
     "sap/m/MessageBox",
@@ -12,7 +14,7 @@ sap.ui.define([
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller,UIComponent, Fragment, MessageBox, MessageToast, formatter, constants, Filter, FilterOperator) {
+    function (Controller,DateFormat,UI5Date,UIComponent, Fragment, MessageBox, MessageToast, formatter, constants, Filter, FilterOperator) {
         "use strict";
 
         return Controller.extend("nba.controller.Equipos", {
@@ -20,7 +22,42 @@ sap.ui.define([
             formatter:formatter,
 
             onInit: function () {
-                
+                let hoy= UI5Date.getInstance()
+                hoy=hoy.toLocaleString();
+                console.log(hoy)
+            },
+            onFilterConferencia:function(){
+                var filters=[];
+                const filtrosModel= this.getView().getModel("filtros").getData();
+                let conferencia=filtrosModel.ConferenciaKey;
+                let nombreEquipo=filtrosModel.NombreKey;
+                var equipoFormateado=nombreEquipo.charAt(0).toUpperCase() + nombreEquipo.slice(1).toLowerCase();
+                if(nombreEquipo && nombreEquipo.length>0){
+                    filters.push(new Filter({
+                        path:"NOMBRE",
+                        operator:FilterOperator.Contains,
+                        value1:equipoFormateado
+                    }))
+                };
+                if(conferencia && conferencia.length>0){
+                    filters.push(new Filter({
+                        path:"CONFERENCIA",
+                        operator:FilterOperator.EQ,
+                        value1:conferencia
+                    }))
+                };
+                var list=this.getView().byId("equiposTable");
+                var binding=list.getBinding("items");
+                binding.filter(filters);
+            },
+            onClearFilter:function(){
+                const filtrosModel= this.getView().getModel("filtros");
+                filtrosModel.setProperty("/ConferenciaKey","");
+                filtrosModel.setProperty("/NombreKey","");
+                var list=this.getView().byId("equiposTable");
+                var binding=list.getBinding("items");
+                binding.filter([]);
+
             },
             onTeamPress: function(oEvent){
                 var oTeam=oEvent.getSource();
@@ -198,20 +235,5 @@ sap.ui.define([
             closePopOver: function () {
                 this.conferenciaPopOver.close();
             },
-            buscarEquipo:function(oEvent){
-                var filters=[];
-                var query=oEvent.getParameter("query");
-                var queryFormateado=query.charAt(0).toUpperCase() + query.slice(1).toLowerCase();
-                if(query && query.length>0){
-                    filters.push(new Filter({
-                        path:"NOMBRE",
-                        operator:FilterOperator.Contains,
-                        value1:queryFormateado
-                    }))
-                };
-                var list=this.getView().byId("equiposTable");
-                var binding=list.getBinding("items");
-                binding.filter(filters);
-            }
         });
     });

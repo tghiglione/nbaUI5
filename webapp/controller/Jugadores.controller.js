@@ -218,52 +218,53 @@ sap.ui.define([
             },
             onFilter:function(){
                 var bundle=this.getView().getModel("i18n").getResourceBundle();
+                const filtrosModel=this.getView().getModel("filtros").getData();
                 let filters=[undefined,undefined,undefined]
-                let filtro=this.getView().byId("selectPosicion").getSelectedItem().getText();
-                let ordenamiento=this.getView().byId("selectSort").getSelectedItem().getText().toUpperCase();
-                let agrupamiento=this.getView().byId("selectGroup").getSelectedItem().getText().toUpperCase();
+                let filtro=filtrosModel.PosicionKey;
+                let ordenamiento=filtrosModel.SortKey.toUpperCase();
+                let agrupamiento=filtrosModel.GroupKey.toUpperCase();
                 let list=this.getView().byId("jugadoresTable");
                 let binding=list.getBinding("items");
+                
                 if (filtro.length>0 ) {
-                    let filtrado= new Filter({
+                    let filtrado=new Filter({
                         path:"POSICION",
                         operator:FilterOperator.EQ,
                         value1:filtro
                     });
-                    filters.splice(0,1,filtrado)
+                    filters.splice(0,1,filtrado);
                     binding.filter(filters[0])
-                }
+                };
                 if(ordenamiento.length>0){
                     let orden=new Sorter({
                         path:ordenamiento,
                         descending: true,
                         group:false
                     })
-                    filters.splice(1,1,orden)
+                    filters.splice(1,1,orden);
                     binding.sort(filters[1])
                 }
                 if(agrupamiento.length>0){     
-                    let grupo=new Sorter({
+                    let agrupar=new Sorter({
                         path:agrupamiento,
                         group:true
-                    })
-                    filters.splice(2,1,grupo)
+                    });
+                    filters.splice(2,1,agrupar);
                     binding.sort(filters[2])
-                   
                 }
                 if(agrupamiento==="" && ordenamiento==="" && filtro===""){
                     MessageToast.show(bundle.getText("filtroVacio"))
-                }    
+                }  
             },
             onClearFilter:function(){
-                let borrarFiltros=[];
-                this.getView().byId("selectPosicion").setSelectedKey("0");
-                this.getView().byId("selectSort").setSelectedKey("0");
-                this.getView().byId("selectGroup").setSelectedKey("0");
+                const oModel=this.getView().getModel("filtros");
+                oModel.setProperty("/PosicionKey","");
+                oModel.setProperty("/SortKey","");
+                oModel.setProperty("/GroupKey","");     
                 let list=this.getView().byId("jugadoresTable");
                 let binding=list.getBinding("items");
-                binding.filter(borrarFiltros)
-                binding.sort(borrarFiltros)
+                binding.filter([])
+                binding.sort([])
             },
         });
     });

@@ -47,35 +47,25 @@
 					>
 					<headerToolbar>
 					<Toolbar id="_IDGenToolbar2">
-						<Text id="_IDGenText6" text="{i18n>filtrarPosicion}"/>
-						<Select id="selectPosicion" selectedKey="0" forceSelection="false">
+						<Label id="labelFiltrarPosicion" labelFor="selectPosicion" class="sapUiSmallMargin" text="{i18n>filtrarPosicion}"/>
+						<Select id="selectPosicion" selectedKey="{filtros>/PosicionKey}" forceSelection="false" items="{filtros>/Posicion}">
 							<items>
-								<core:Item id="_IDGenItem0" key="0" text=""/>	
-								<core:Item id="_IDGenItem1" key="1" text="{i18n>base}"/>
-								<core:Item id="_IDGenItem2" key="2" text="{i18n>alero}"/>
-								<core:Item id="_IDGenItem3" key="3" text="{i18n>escolta}"/>
-								<core:Item id="_IDGenItem4" key="4" text="{i18n>alaPivot}"/>
-								<core:Item id="_IDGenItem5" key="5" text="{i18n>pivot}"/>
+								<core:Item id="_IDGenItem0" key="{filtros>key}" text="{filtros>text}"/>	
+								
 							</items>
 						</Select>
 						<ToolbarSeparator id="_IDGenToolbarSeparator3" />
-						<Text id="_IDGenText7" text="{i18n>ordenarPor}"/>
-						<Select id="selectSort" selectedKey="0" forceSelection="false">
+						<Label id="labelOrdenar" labelFor="selectSort" class="sapUiSmallMargin" text="{i18n>ordenarPor}"/>
+						<Select id="selectSort" selectedKey="{filtros>/SortKey}" forceSelection="false" items="{filtros>/SortValues}">
 							<items>
-								<core:Item id="_IDGenItem9" key="0" text=""/>	
-								<core:Item id="_IDGenItem6" key="1" text="Nombre"/>
-								<core:Item id="_IDGenItem7" key="2" text="Altura"/>
-								<core:Item id="_IDGenItem8" key="3" text="Edad"/>
+								<core:Item id="_IDGenItem9" key="{filtros>key}" text="{filtros>text}"/>	
 							</items>
 						</Select>						
 						<ToolbarSeparator id="_IDGenToolbarSeparator4" />
-						<Text id="_IDGenText" text="{i18n>agruparPor}"/>
-						<Select id="selectGroup" selectedKey="0" forceSelection="false">
+						<Label id="labelAgrupar" labelFor="selectGroup" class="sapUiSmallMargin" text="{i18n>agruparPor}"/>
+						<Select id="selectGroup" selectedKey="{filtros>/GroupKey}" forceSelection="false" items="{filtros>/GroupValues}">
 							<items>
-								<core:Item id="_IDGenItem10" key="0" text=""/>	
-								<core:Item id="_IDGenItem11" key="1" text="Nacionalidad"/>
-								<core:Item id="_IDGenItem12" key="2" text="Altura"/>
-								<core:Item id="_IDGenItem13" key="3" text="Edad"/>
+								<core:Item id="_IDGenItem10" key="{filtros>key}" text="{filtros>text}"/>	
 							</items>
 						</Select>	
 						<Button id="btnFilters" text="{i18n>filtrar}" icon="sap-icon://filter" press="onFilter"></Button>
