@@ -7,20 +7,24 @@ sap.ui.define([
     "../utils/formatter",
     "../utils/constants",
     "sap/ui/model/Filter",
-    "sap/ui/model/FilterOperator"
+    "sap/ui/model/FilterOperator",
+    'sap/ui/export/library',
+    'sap/ui/export/Spreadsheet'
+ 
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller,UIComponent, Fragment, MessageBox, MessageToast, formatter, constants, Filter, FilterOperator) {
+    function (Controller,UIComponent, Fragment, MessageBox, MessageToast, formatter, constants, Filter, FilterOperator,exportLibrary,Spreadsheet) {
         "use strict";
 
         return Controller.extend("nba.controller.Equipos", {
 
             formatter:formatter,
+            
 
             onInit: function () {
-                
+                 
             },
             onFilterConferencia:function(){
                 var filters=[];
@@ -230,6 +234,51 @@ sap.ui.define([
             },
             closePopOver: function () {
                 this.conferenciaPopOver.close();
+            },
+            createColumnConfig: function() {
+
+                var EdmType = exportLibrary.EdmType;
+
+                return [
+                    {
+                       label: 'NOMBRE',
+                        property: 'NOMBRE',
+                        type: EdmType.String
+                    },
+                    {
+                        label: 'CIUDAD',
+                        property: 'CIUDAD',
+                        type: EdmType.String
+                    },
+                    {
+                        label: 'ESTADIO',
+                        property: 'ESTADIO',
+                        type: EdmType.String
+                    },
+                    {
+                        label: 'CONFERENCIA',
+                        property: 'CONFERENCIA',
+                        type: EdmType.String
+                    }];
+            },
+            onExportList:function(){
+                let bundle=this.getView().getModel("i18n").getResourceBundle();
+                let oTable = this.getView().byId('equiposTable');
+                let oBinding = oTable.getBinding('items');
+                let aCols = this.createColumnConfig();
+
+                let oSettings = {
+                    workbook: { columns: aCols },
+                    dataSource: oBinding
+                };
+
+                let oSheet = new Spreadsheet(oSettings);
+                oSheet.build()
+                    .then(function() {
+                        MessageToast.show(bundle.getText("descargaExitosa"));
+                    }).finally(function() {
+                        oSheet.destroy();
+                    });
             },
         });
     });

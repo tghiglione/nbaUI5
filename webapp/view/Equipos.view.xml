@@ -16,9 +16,11 @@
 						<Toolbar id="_IDGenToolbar1">
 							<Title id="_IDGenTitle2" text="{i18n>titleEquipos}" level="H2"/>
 							<ToolbarSpacer id="_IDGenToolbarSpacer1"/>
+							<ToolbarSeparator id="_IDGenToolbarSeparator1" />
 							<Label id="labelSearch" labelFor="buscadorEquipo" text="{i18n>buscarEquipo}" class="sapUiSmallMargin"/>
 							<Input id="buscadorEquipo" value="{filtros>/NombreKey}" placeholder="Nombre del equipo" class="sapUiSmallMargin" width="200px"/>
  							<ToolbarSpacer id="_IDGenToolbarSpacer2"/>
+							<ToolbarSeparator id="_IDGenToolbarSeparator2" />
 							<Label id="labelConferencia" text="{i18n>conferencia}" class="sapUiSmallMargin"/>
 							<Select id="slConferencia" selectedKey="{filtros>/ConferenciaKey}" forceSelection="false" items="{filtros>/Conferencia}">
 								<items>
@@ -28,6 +30,10 @@
 							<Button id="btnFilter" icon="sap-icon://filter" press="onFilterConferencia"/>
 							<Button id="btnClearFilter" icon="sap-icon://clear-filter" press="onClearFilter"/>
 							<ToolbarSpacer id="_IDGenToolbarSpacer3"/> 
+							<ToolbarSeparator id="_IDGenToolbarSeparator3" />
+							<Button id="btnExport" icon="sap-icon://excel-attachment" press="onExportList"></Button>
+							<ToolbarSpacer id="_IDGenToolbarSpacer4"/> 
+							<ToolbarSeparator id="_IDGenToolbarSeparator5" />
 							<Button id="_IDGenButton"
 								tooltip="Add"
 								icon="sap-icon://add"
