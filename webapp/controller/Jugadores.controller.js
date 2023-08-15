@@ -7,12 +7,13 @@ sap.ui.define([
     "../utils/constants",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
-    "sap/ui/model/Sorter"
+    "sap/ui/model/Sorter",
+    "sap/ui/core/date/UI5Date"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller, UIComponent, Fragment, MessageBox, MessageToast,constants, Filter, FilterOperator, Sorter) {
+    function (Controller, UIComponent, Fragment, MessageBox, MessageToast,constants, Filter, FilterOperator, Sorter,UI5Date) {
         "use strict";
 
         return Controller.extend("nba.controller.Jugadores", {
@@ -66,7 +67,6 @@ sap.ui.define([
                 var inputPosicionId = Fragment.createId(constants.model.ids.Fragments.FormDialogCrearJugador, "selectPosicion");
                 var inputAlturaId = Fragment.createId(constants.model.ids.Fragments.FormDialogCrearJugador, "inputAltura");
                 var inputNacimientoId = Fragment.createId(constants.model.ids.Fragments.FormDialogCrearJugador, "datePicker");
-                var inputEdadId = Fragment.createId(constants.model.ids.Fragments.FormDialogCrearJugador, "inputEdad");
                 var inputNacionalidadId = Fragment.createId(constants.model.ids.Fragments.FormDialogCrearJugador, "inputNacionalidad");
                 var inputImagenId = Fragment.createId(constants.model.ids.Fragments.FormDialogCrearJugador, "inputImagen");
                 
@@ -76,19 +76,23 @@ sap.ui.define([
                 var posicion = sap.ui.getCore().byId(inputPosicionId).getSelectedItem().getText();
                 var altura = parseInt(sap.ui.getCore().byId(inputAlturaId).getValue());
                 var nacimiento = sap.ui.getCore().byId(inputNacimientoId).getValue();
-                var edad = parseInt(sap.ui.getCore().byId(inputEdadId).getValue());
                 var nacionalidad = sap.ui.getCore().byId(inputNacionalidadId).getValue();
                 var imagen = sap.ui.getCore().byId(inputImagenId).getValue();
 
-                var nombreFormateado = nombre.charAt(0).toUpperCase() + nombre.slice(1).toLowerCase();
-                var apellidoFormateado = apellido.charAt(0).toUpperCase() + apellido.slice(1).toLowerCase();
+                let hoy= UI5Date.getInstance();
+                let day=(hoy.getDate()).toString().padStart(2,'0'); //para agregar 0 a la izquierda en caso de necesitar
+                let month=(hoy.getMonth() +1).toString().padStart(2,'0');
+                let year=(hoy.getFullYear()).toString();
+                let hoyFormat=year+month+day;
+                
+                let edad= Math.floor((parseInt(hoyFormat) - parseInt(nacimiento))/10000);
                 
                 var sPath="/JugadoresSet";
 
                 var newPlayer={
                     "EQUIPOID": `${equipoId}`,
-                    "NOMBRE": `${nombreFormateado}`,
-                    "APELLIDO": `${apellidoFormateado}`,
+                    "NOMBRE": `${nombre}`,
+                    "APELLIDO": `${apellido}`,
                     "POSICION": `${posicion}`,
                     "ALTURA": altura,
                     "NACIMIENTO": `${nacimiento}`,
@@ -97,7 +101,7 @@ sap.ui.define([
                     "IMAGEN": `${imagen}`,
                 }
                 
-                if(nombre!=="" && apellido!==""  && posicion!=="" && altura!=="" && nacimiento!=="" && edad!=="" && nacionalidad!==""){
+                if(nombre!=="" && apellido!==""  && posicion!=="" && altura!=="" && nacimiento!=="" && nacionalidad!==""){
                     MessageBox.confirm(
                         bundle.getText("preguntaAgregarJugador"),
                         function(oAction){
@@ -109,7 +113,6 @@ sap.ui.define([
                                         sap.ui.getCore().byId(inputApellidoId).setValue("");
                                         sap.ui.getCore().byId(inputAlturaId).setValue("");
                                         sap.ui.getCore().byId(inputNacimientoId).setValue("");
-                                        sap.ui.getCore().byId(inputEdadId).setValue("");
                                         sap.ui.getCore().byId(inputNacionalidadId).setValue("");
                                         sap.ui.getCore().byId(inputImagenId).setValue("");
                                         that.openDialog.close()

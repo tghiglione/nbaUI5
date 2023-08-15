@@ -1,7 +1,5 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    "sap/ui/core/format/DateFormat",
-    "sap/ui/core/date/UI5Date",
     "sap/ui/core/UIComponent",
     "sap/ui/core/Fragment",
     "sap/m/MessageBox",
@@ -14,7 +12,7 @@ sap.ui.define([
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller,DateFormat,UI5Date,UIComponent, Fragment, MessageBox, MessageToast, formatter, constants, Filter, FilterOperator) {
+    function (Controller,UIComponent, Fragment, MessageBox, MessageToast, formatter, constants, Filter, FilterOperator) {
         "use strict";
 
         return Controller.extend("nba.controller.Equipos", {
@@ -22,9 +20,7 @@ sap.ui.define([
             formatter:formatter,
 
             onInit: function () {
-                let hoy= UI5Date.getInstance()
-                hoy=hoy.toLocaleString();
-                console.log(hoy)
+                
             },
             onFilterConferencia:function(){
                 var filters=[];

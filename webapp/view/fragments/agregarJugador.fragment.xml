@@ -22,8 +22,6 @@
 					}"
 					change="handleChange"
 					class="sapUiSmallMarginBottom"/>
-            <Label id="labelEdad" text="{i18n>edad}" labelFor="edad" />
-            <Input id="inputEdad" />
             <Label id="labelNacionalidad" text="{i18n>nacionalidad}" labelFor="nacionalidad" />
             <Input id="inputNacionalidad" />	
             <Label id="labelImagen" text="{i18n>urlImagen}" labelFor="imagen" />

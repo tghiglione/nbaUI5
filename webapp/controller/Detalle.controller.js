@@ -6,11 +6,12 @@ sap.ui.define([
     "sap/m/MessageToast",
     "../utils/formatter",
     "../utils/constants",
+    "sap/ui/core/date/UI5Date"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller,UIComponent, Fragment, MessageBox, MessageToast, formatter,constants) {
+    function (Controller,UIComponent, Fragment, MessageBox, MessageToast, formatter,constants,UI5Date) {
         "use strict";
 
         return Controller.extend("nba.controller.Detalle", {
@@ -60,7 +61,6 @@ sap.ui.define([
                 var inputPosicionId = Fragment.createId(constants.model.ids.Fragments.FormDialogEditarJugador, "selectPosicion");
                 var inputAlturaId = Fragment.createId(constants.model.ids.Fragments.FormDialogEditarJugador, "inputAltura");
                 var inputNacimientoId = Fragment.createId(constants.model.ids.Fragments.FormDialogEditarJugador, "datePicker");
-                var inputEdadId = Fragment.createId(constants.model.ids.Fragments.FormDialogEditarJugador, "inputEdad");
                 var inputNacionalidadId = Fragment.createId(constants.model.ids.Fragments.FormDialogEditarJugador, "inputNacionalidad");
                 var inputImagenId = Fragment.createId(constants.model.ids.Fragments.FormDialogEditarJugador, "inputImagen");
                 
@@ -70,16 +70,20 @@ sap.ui.define([
                 var posicion = sap.ui.getCore().byId(inputPosicionId).getSelectedItem().getText();
                 var altura = parseInt(sap.ui.getCore().byId(inputAlturaId).getValue());
                 var nacimiento = sap.ui.getCore().byId(inputNacimientoId).getValue();
-                var edad = parseInt(sap.ui.getCore().byId(inputEdadId).getValue());
                 var nacionalidad = sap.ui.getCore().byId(inputNacionalidadId).getValue();
                 var imagen = sap.ui.getCore().byId(inputImagenId).getValue();
 
-                var nombreFormateado = nombre.charAt(0).toUpperCase() + nombre.slice(1).toLowerCase();
-                var apellidoFormateado = apellido.charAt(0).toUpperCase() + apellido.slice(1).toLowerCase();
+                let hoy= UI5Date.getInstance();
+                let day=(hoy.getDate()).toString().padStart(2,'0'); //para agregar 0 a la izquierda en caso de necesitar
+                let month=(hoy.getMonth() +1).toString().padStart(2,'0');
+                let year=(hoy.getFullYear()).toString();
+                let hoyFormat=year+month+day;
+                
+                let edad= Math.floor((parseInt(hoyFormat) - parseInt(nacimiento))/10000);
                 
                 var editPlayer={
-                    "NOMBRE": `${nombreFormateado}`,
-                    "APELLIDO": `${apellidoFormateado}`,
+                    "NOMBRE": `${nombre}`,
+                    "APELLIDO": `${apellido}`,
                     "POSICION": `${posicion}`,
                     "ALTURA": altura,
                     "NACIMIENTO": `${nacimiento}`,
@@ -88,7 +92,7 @@ sap.ui.define([
                     "IMAGEN": `${imagen}`,
                 }
                 
-                if(nombre!=="" && apellido!==""  && posicion!=="" && altura!=="" && nacimiento!=="" && edad!=="" && nacionalidad!==""){
+                if(nombre!=="" && apellido!==""  && posicion!=="" && altura!=="" && nacimiento!=="" && nacionalidad!==""){
                     MessageBox.confirm(
                         bundle.getText("preguntaEditarJugador"),
                         function(oAction){
