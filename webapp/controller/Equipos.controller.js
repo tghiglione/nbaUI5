@@ -22,9 +22,8 @@ sap.ui.define([
 
             formatter:formatter,
             
-
             onInit: function () {
-                 
+            
             },
             onFilterConferencia:function(){
                 var filters=[];
@@ -279,6 +278,10 @@ sap.ui.define([
                     }).finally(function() {
                         oSheet.destroy();
                     });
-            },
+            }, 
+            navToMapa:function(){
+                const oRouter=UIComponent.getRouterFor(this);
+                oRouter.navTo("RouteMapa")
+            }
         });
     });

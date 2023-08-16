@@ -59,7 +59,9 @@
         "sap.ui.webc.main": {},
         "sap.suite.ui.microchart": {},
         "sap.ui.fl": {},
-				"sap.ui.mdc": {}
+				"sap.ui.mdc": {},
+        "sap.ui.layout": {},
+        "sap.ui.vbm": {}
       }
     },
     "contentDensities": {
@@ -123,6 +125,13 @@
           "target": [
             "TargetDetalle"
           ]
+        },
+        {
+          "name": "RouteMapa",
+          "pattern": "mapa/",
+          "target": [
+            "TargetMapa"
+          ]
         }
       ],
       "targets": {
@@ -146,6 +155,13 @@
           "clearControlAggregation": false,
           "viewId": "Detalle",
           "viewName": "Detalle"
+        },
+        "TargetMapa": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "Mapa",
+          "viewName": "Mapa"
         }
       }
     },

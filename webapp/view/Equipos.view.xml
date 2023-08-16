@@ -1,12 +1,24 @@
 <mvc:View
 	controllerName="nba.controller.Equipos"
 	xmlns:mvc="sap.ui.core.mvc"
-	xmlns:microchart="sap.suite.ui.microchart"
-	xmlns:main="sap.ui.webc.main"
 	xmlns:l="sap.ui.layout"
+	xmlns:vbm="sap.ui.vbm"
 	xmlns:core="sap.ui.core"
 	xmlns="sap.m" displayBlock="true">
 	<Page id="equipos" showHeader="false" >
+		<l:HorizontalLayout id="_IDGenHorizontalLayout1" class="sapUiContentPadding">
+			<l:content>
+				<Button id="_IDGenButton4"
+					text="{i18n>equiposPorConferencia}"
+					press="openConferenciaPopOver"
+					ariaHasPopup="Dialog"
+					type="Neutral" />
+				<Button id="btn-nav"
+				text="{i18n>verMapa}"
+				press="navToMapa"
+				type="Emphasized" />
+			</l:content>
+		</l:HorizontalLayout>
 		<Table id="equiposTable"
 			items="{/EquiposSet}"
 			headerText="{i18n>tabletitle}"
@@ -71,16 +83,5 @@
 				
 			</items>
 		</Table>
-		<l:VerticalLayout id="_IDGenVerticalLayout1"
-			class="sapUiContentPadding"
-			width="100%">
-			<l:content>
-				<Button id="_IDGenButton4"
-					text="{i18n>equiposPorConferencia}"
-					press="openConferenciaPopOver"
-					ariaHasPopup="Dialog"
-					type="Neutral" />
-			</l:content>
-		</l:VerticalLayout>
 	</Page>
 </mvc:View>

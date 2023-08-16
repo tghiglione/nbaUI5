@@ -4,7 +4,8 @@
 	xmlns:core="sap.ui.core"
 	xmlns="sap.m"
 	xmlns:f="sap.f"
-	xmlns:layout="sap.ui.layout"
+	xmlns:l="sap.ui.layout"
+	xmlns:vbm="sap.ui.vbm"
 	height="100%">
 	<f:DynamicPage id="dynamicPageId" headerExpanded="{/headerExpanded}" toggleHeaderOnTitleClick="{/titleClickable}">
 		<f:title>
@@ -25,16 +26,16 @@
 		</f:title>
 		<f:header>
 			<f:DynamicPageHeader id="_IDGenDynamicPageHeader1" pinnable="true">
-				<layout:HorizontalLayout id="_IDGenHorizontalLayout1" allowWrapping="true">
-					<layout:VerticalLayout id="_IDGenVerticalLayout1" class="sapUiMediumMarginEnd">
+				<l:HorizontalLayout id="_IDGenHorizontalLayout1" allowWrapping="true">
+					<l:VerticalLayout id="_IDGenVerticalLayout1" class="sapUiMediumMarginEnd">
 						<ObjectAttribute id="_IDGenObjectAttribute1" title="{i18n>ciudad}" text="{CIUDAD}"/>
 						<ObjectAttribute id="_IDGenObjectAttribute2" title="{i18n>estadio}" text="{ESTADIO}"/>
-					</layout:VerticalLayout>
-					<layout:VerticalLayout id="_IDGenVerticalLayout2">
+					</l:VerticalLayout>
+					<l:VerticalLayout id="_IDGenVerticalLayout2">
 						<ObjectAttribute id="_IDGenObjectAttribute3" title="{i18n>conferencia}"/>
 						<ObjectStatus id="_IDGenObjectStatus1" text="{CONFERENCIA}" state="Success" />
-					</layout:VerticalLayout>
-				</layout:HorizontalLayout>
+					</l:VerticalLayout>
+				</l:HorizontalLayout>
 			</f:DynamicPageHeader>
 		</f:header>
 		<f:content>
@@ -112,4 +113,5 @@
 			</Table>
 		</f:content>
 	</f:DynamicPage>
+	
 </mvc:View>

@@ -1,0 +1,49 @@
+<mvc:View
+	controllerName="nba.controller.Mapa"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	xmlns:vbm="sap.ui.vbm"
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m" displayBlock="true">
+		<l:FixFlex id="_IDGenFixFlex1" class="fixFlexFixedSize">
+			<l:fixContent>
+				<Panel id="_IDGenPanel1" headerText="{i18n>ubicacionEquipos}">
+					<headerToolbar>
+						<Toolbar id="_IDGenToolbar1">
+							<Title id="_IDGenTitle1" text="{i18n>ubicacionEquipos}" />
+							<ToolbarSpacer id="_IDGenToolbarSpacer1" />
+							<Button id="btnAgregar" icon="sap-icon://add" press="openModal"/>
+						</Toolbar>
+					</headerToolbar>
+					<VBox id="_IDGenVBox1" class="sapUiMediumMargin">
+						<Label id="labelNombre" text="{i18n>nombre}" labelFor="nombre" />
+						<Input id="inputNombre" />
+						<Label id="labelLatitud" text="{i18n>Latitud}" labelFor="inputLatitud" />
+						<Input id="inputLatitud" />
+						<Label id="labelLongitud" text="{i18n>longitud}" labelFor="inputLongitud" />
+						<Input id="inputLongitud" />
+					</VBox>					
+					<Button class="sapUiResponsiveMargin" id="btn-agregar" press="onAddMapa" text="{i18n>agregar}"  type="Emphasized"/>				
+				</Panel>
+			</l:fixContent>
+			<l:flexContent>
+				<vbm:AnalyticMap id="vbi" width="100%" xmlns:l="sap.ui.layout"
+					height="100%" initialPosition="0;10;0">
+					<vbm:resources>
+						<vbm:Resource id="_IDGenResource1" name="white_label.png"
+							src="test-resources/sap/ui/vbm/demokit/media/images/Label_sample_White_rect_border.png">
+						</vbm:Resource>
+					</vbm:resources>
+					<vbm:vos>
+						<vbm:Spots id="_IDGenSpots1" items="{/DetalleSet}" click="onClickItem"
+							contextMenu="onContextMenuItem">
+							<vbm:Spot id="_IDGenSpot1" position="{COORDENADAS}" tooltip="{NOMBRE}" type="Hidden"
+								labelPos="5" labelType="Success" labelText="{NOMBRE}" labelArrow="true"
+								click="onClickSpot" contextMenu="onContextMenuSpot" />
+						</vbm:Spots>
+						<vbm:Spots id="eSpot" />
+					</vbm:vos>
+				</vbm:AnalyticMap>
+			</l:flexContent>
+		</l:FixFlex>
+</mvc:View>
