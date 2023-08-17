@@ -1,7 +1,7 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" >
     <Dialog id="openAddMapa" title="{i18n>agregarMapa}">
         <VBox id="_IDGenVBox1" class="sapUiMediumMargin">
-            <Label id="labelNombre" text="{i18n>nombre}" labelFor="nombre" />
+            <Label id="labelNombre" text="{i18n>nombre}" labelFor="inputNombre" />
             <Input id="inputNombre" />
             <Label id="labelLatitud" text="{i18n>Latitud}" labelFor="inputLatitud" />
             <Input id="inputLatitud" />

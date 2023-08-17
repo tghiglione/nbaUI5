@@ -1,6 +1,5 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    "sap/ui/core/UIComponent",
     "../utils/constants",
     "sap/ui/core/Fragment",
     "sap/m/MessageBox",
@@ -20,7 +19,7 @@ sap.ui.define([
             openModal:function(){
                 var oView=this.getView();
                 if(!this.openAddMapa){
-                    this.openAddMapa=sap.ui.xmlfragment("IdFragment6","nba.view.fragments.agregarMapa",this);
+                    this.openAddMapa=sap.ui.xmlfragment(constants.model.ids.Fragments.FormDialogMapa,constants.model.routes.Fragments.AgregarEquipoMapa,this);
                     oView.addDependent(this.openAddMapa)
                 }
                 this.openAddMapa.open();
@@ -33,14 +32,14 @@ sap.ui.define([
                 var bundle=this.getView().getModel("i18n").getResourceBundle();
                 var that=this;
 
-               /*  var inputNombreId = Fragment.createId("IdFragment6", "inputNombre"); 
-                var inputLatitudId = Fragment.createId("IdFragment6", "inputLatitud");
-                var inputLongitudId = Fragment.createId("IdFragment6", "inputLongitud"); */
+                var inputNombreId = Fragment.createId(constants.model.ids.Fragments.FormDialogMapa, "inputNombre"); 
+                var inputLatitudId = Fragment.createId(constants.model.ids.Fragments.FormDialogMapa, "inputLatitud");
+                var inputLongitudId = Fragment.createId(constants.model.ids.Fragments.FormDialogMapa, "inputLongitud");
                
 
-                var nombre = this.getView().byId("inputNombre").getValue();
-                var latitud = this.getView().byId("inputLatitud").getValue();
-                var longitud = this.getView().byId("inputLongitud").getValue();
+                var nombre = sap.ui.getCore().byId(inputNombreId).getValue();
+                var latitud = sap.ui.getCore().byId(inputLatitudId).getValue();
+                var longitud = sap.ui.getCore().byId(inputLongitudId).getValue();
                
 
                 var sPath="/DetalleSet";
@@ -51,24 +50,75 @@ sap.ui.define([
                 }
                 
                 if(nombre!=="" && latitud!==""  && longitud!==""){
-                    
-                    oData.create(sPath, newTeam, {
-                        success: function () {
-                            MessageToast.show(bundle.getText("equipoAgregadoExito"))
-                            that.getView().byId("inputNombre").setValue("");
-                            that.getView().byId("inputLatitud").setValue("");
-                            that.getView().byId("inputLongitud").setValue("");
-                            
+                    MessageBox.confirm(
+                        bundle.getText("preguntaAgregarEquipo"),
+                        function(oAction){
+                            if(MessageBox.Action.OK===oAction){
+                                oData.create(sPath, newTeam, {
+                                    success: function () {
+                                        MessageToast.show(bundle.getText("equipoAgregadoExito"))
+                                        sap.ui.getCore().byId(inputNombreId).setValue("");
+                                        sap.ui.getCore().byId(inputLatitudId).setValue("");
+                                        sap.ui.getCore().byId(inputLongitudId).setValue("");
+                                        that.openAddMapa.close();
+                                    },
+                                    error: function (error) {
+                                        MessageToast.show(bundle.getText("equipoAgregadoError"))
+                                        console.log(error)
+                                    }
+                                });
+                               
+                            }
                         },
-                        error: function (error) {
-                            MessageToast.show(bundle.getText("equipoAgregadoError"))
-                            console.log(error)
-                        }
-                    })               
+                        bundle.getText("agregarEquipo") 
+                    )              
                 }else{
                     MessageToast.show(bundle.getText("completarCampos"))
                 }
                 
+            },
+            openDelete:function(){
+                var oView=this.getView();
+                if(!this.openEliminarMapa){
+                    this.openEliminarMapa=sap.ui.xmlfragment(constants.model.ids.Fragments.FormDialogEliminarMapa,constants.model.routes.Fragments.EliminarEquipoMapa,this);
+                    oView.addDependent(this.openEliminarMapa)
+                }
+                this.openEliminarMapa.open();
+            },
+            onCloseEliminar:function(){
+                this.openEliminarMapa.close();
+            },
+            onDelete:function(){
+                var oData=this.getView().getModel();
+                var bundle=this.getView().getModel("i18n").getResourceBundle();
+                var that=this;
+
+                var inputEquipoId = Fragment.createId(constants.model.ids.Fragments.FormDialogEliminarMapa, "selectEquipo");
+
+                var equipo = sap.ui.getCore().byId(inputEquipoId).getSelectedItem().getBindingContext().getObject();
+                var equipoId=equipo.JUGADORID;
+            
+                var oPath=`/DetalleSet('${equipoId}')`;
+                
+                MessageBox.confirm(
+                    bundle.getText("preguntaEliminarEquipo"),
+                    function(oAction){
+                        if(MessageBox.Action.OK===oAction){
+                            oData.remove(oPath,{
+                                success: function () {
+                                    that.openEliminarMapa.close();
+                                    MessageToast.show(bundle.getText("equipoEliminadoExito"))
+                                },
+                                error: function (oError) {
+                                    MessageToast.show(bundle.getText("equipoEliminadoError"))
+                                    console.log(oError)
+                                }       
+                            });
+                            
+                        }
+                    },
+                    bundle.getText("eliminarEquipo")
+                )  
             }
         });
     });

@@ -9,7 +9,8 @@ sap.ui.define([],function(){
                     FormDialogEditarJugador:"IdFragment3",
                     FormDialogCrearJugador:"IdFragment4",
                     FormDialogConferenciaPopOver:"IdFragment5",
-                    FormDialogMapa:"IdFragment6"
+                    FormDialogMapa:"IdFragment6",
+                    FormDialogEliminarMapa:"IdFragment7"
                 }
             },
             routes:{
@@ -19,7 +20,8 @@ sap.ui.define([],function(){
                     EditarEquipoDialog: "nba.view.fragments.editarEquipo",
                     EditarJugadorDialog:"nba.view.fragments.editarJugador",
                     ConferenciaDialog:"nba.view.fragments.conferenciaPopOver",
-                    AgregarEquipoMapa:"nba.view.fragments.agregarMapa"
+                    AgregarEquipoMapa:"nba.view.fragments.agregarMapa",
+                    EliminarEquipoMapa:"nba.view.fragments.EliminarMapa"
                 }
             }
         }

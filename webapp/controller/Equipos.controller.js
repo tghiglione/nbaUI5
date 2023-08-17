@@ -117,6 +117,16 @@ sap.ui.define([
                                         sap.ui.getCore().byId(inputEstadioId).setValue("");
                                         sap.ui.getCore().byId(inputImagenId).setValue("");
                                         that.openAgregarEquipo.close()
+                                        MessageBox.confirm(
+                                            bundle.getText("preguntaNavegarMapa"),
+                                            function(oAction){
+                                                if(MessageBox.Action.OK===oAction){
+                                                    let oRouter=UIComponent.getRouterFor(that);
+                                                    oRouter.navTo("RouteMapa")
+                                                }
+                                            },
+                                            bundle.getText("navegarMapa")
+                                        )
                                     },
                                     error: function (error) {
                                         MessageToast.show(bundle.getText("equipoAgregadoError"))

@@ -13,17 +13,9 @@
 							<Title id="_IDGenTitle1" text="{i18n>ubicacionEquipos}" />
 							<ToolbarSpacer id="_IDGenToolbarSpacer1" />
 							<Button id="btnAgregar" icon="sap-icon://add" press="openModal"/>
+							<Button id="btnEiminiar" icon="sap-icon://delete" press="openDelete"/>
 						</Toolbar>
-					</headerToolbar>
-					<VBox id="_IDGenVBox1" class="sapUiMediumMargin">
-						<Label id="labelNombre" text="{i18n>nombre}" labelFor="nombre" />
-						<Input id="inputNombre" />
-						<Label id="labelLatitud" text="{i18n>Latitud}" labelFor="inputLatitud" />
-						<Input id="inputLatitud" />
-						<Label id="labelLongitud" text="{i18n>longitud}" labelFor="inputLongitud" />
-						<Input id="inputLongitud" />
-					</VBox>					
-					<Button class="sapUiResponsiveMargin" id="btn-agregar" press="onAddMapa" text="{i18n>agregar}"  type="Emphasized"/>				
+					</headerToolbar>	
 				</Panel>
 			</l:fixContent>
 			<l:flexContent>

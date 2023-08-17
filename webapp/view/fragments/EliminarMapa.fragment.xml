@@ -1,0 +1,18 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" >
+    <Dialog id="openEliminarMapa" title="{i18n>eliminarMapa}">
+        <VBox id="_IDGenVBox1" class="sapUiMediumMargin">
+            <Label id="labelEquipo" text="{i18n>equipo}" labelFor="selectEquipo" />
+            <Select id="selectEquipo" items="{/DetalleSet}">
+                <items>
+                    <core:Item id="equipoSelect" key="{JUGADORID}" text="{NOMBRE}"/>
+                </items>
+            </Select>
+        </VBox>
+        <beginButton>
+            <Button class="sapUiResponsiveMargin" id="btn-eliminar" press="onDelete" text="{i18n>eliminar}"  type="Emphasized"/>
+        </beginButton>
+        <endButton>
+            <Button id="btn-close" press="onCloseEliminar" text="{i18n>cancelar}"/>
+        </endButton>  
+    </Dialog>
+</core:FragmentDefinition>
