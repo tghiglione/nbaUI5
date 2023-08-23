@@ -17,6 +17,10 @@
 				text="{i18n>verMapa}"
 				press="navToMapa"
 				type="Emphasized" />
+				<Button id="btn-cal"
+				text="{i18n>verCalendario}"
+				press="navToCal"
+				type="Emphasized" />
 			</l:content>
 		</l:HorizontalLayout>
 		<Table id="equiposTable"

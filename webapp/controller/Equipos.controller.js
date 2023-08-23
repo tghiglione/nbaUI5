@@ -292,6 +292,10 @@ sap.ui.define([
             navToMapa:function(){
                 const oRouter=UIComponent.getRouterFor(this);
                 oRouter.navTo("RouteMapa")
+            },
+            navToCal:function(){
+                var oRouter=UIComponent.getRouterFor(this);
+                oRouter.navTo("RouteCalendario")
             }
         });
     });

@@ -132,6 +132,13 @@
           "target": [
             "TargetMapa"
           ]
+        },
+        {
+          "name": "RouteCalendario",
+          "pattern": "calendario/",
+          "target": [
+            "TargetCalendario"
+          ]
         }
       ],
       "targets": {
@@ -162,6 +169,13 @@
           "clearControlAggregation": false,
           "viewId": "Mapa",
           "viewName": "Mapa"
+        },
+        "TargetCalendario": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "Calendario",
+          "viewName": "Calendario"
         }
       }
     },
